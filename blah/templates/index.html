@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}blah - home{% endblock %}
+
+{% block content %}
+
+{% if posts.count() == 0 %}
+There are no posts here.
+{% else %}
+{% for post in posts %}
+<div class="post">
+	<span class="title">{{ post["title"] }}</span>
+	<span class="author">{{ post["author"] }}</span>
+	<span class="datetime">{{ post["datetime"].ctime() }}</span>
+	<div class="content">{{ post["content"] }}</div>
+	{% if post["tags"]|length > 0 %}<span class="tags">
+		{% for tag in post["tags"] %}<span class="tag">{{ tag }}</span>{% endfor %}
+	</span>
+	{% endif %}
+</div>
+{% endfor %}
+
+{% endif %}
+
+{% endblock content %}
