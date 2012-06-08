@@ -1,0 +1,32 @@
+header, nav, #posts, footer{
+	min-width: 35em;
+	max-width: 75em;
+	border: 1px solid black;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: -1px;
+}
+header div, footer div {
+	padding: 10px;
+}
+
+nav ul, .tags { margin: 0px; padding: 10px;}
+nav ul li, .tags li { display: inline; }
+.tags { display: inline; }
+#posts article {
+	border: 1px solid black;
+	margin: 10px;
+	padding: 10px;
+}
+
+#posts article .title {
+	font-weight: bold;
+	text-decoration: underline;
+	font-size: 2em;
+	display: block;
+}
+#posts article .author {}
+#posts article .datetime { float:right; }
+#posts article section {}
+#posts article .tags { }
+#posts article .tags .tag {}
