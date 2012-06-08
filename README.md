@@ -4,9 +4,10 @@ blah: A Simple Flask Blog
 Requirements
 ------------
 
-- mongoDB
+- Flask (`easy_install flask`)
+- markdown (`easy_install markdown`)
+- mongoDB (`easy_install pymongo`)
 - Python 2
-- Flask
 
 Setup
 -----
