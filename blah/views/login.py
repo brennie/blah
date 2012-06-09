@@ -5,8 +5,6 @@ def get():
     if "user" in session.keys():
         return redirect(url_for("index"))
 
-    print request.args.get("next")
-
     return render_template("login.html", next=request.args.get("next"))
 
 def post():
