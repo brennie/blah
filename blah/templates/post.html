@@ -8,7 +8,7 @@
 	<section class="content">{{ md(post["content"])|safe }}</section>
 	{% if post["tags"]|length > 0 %}tagged in:<ul class="tags">
 		{% for tag in post["tags"] %}
-		<li><span><a href="#">{{ tag }}</a></span></li>
+		<li><span><a href="{{ url_for('tag', tag=tag) }}">{{ tag }}</a></span></li>
 		{% endfor %}
 	</ul>{% endif %}
 </article>

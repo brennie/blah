@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}blah - home{% endblock %}
+{% block title %}blah - posts tagged "{{ tag }}"{% endblock %}
 {% block content %}
 {% if posts.count() == 0 %}
 	There are no posts here.
