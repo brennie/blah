@@ -22,6 +22,7 @@ class BlahApp(Flask):
         self.config.from_pyfile("blah.cfg")
 
         self.add_url_rule("/", "index", views.index.get)
+        self.add_url_rule("/post/<id>", "post", views.post.get)
 
         @self.before_request
         def before_request():

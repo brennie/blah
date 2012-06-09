@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}blah - {{ post["title"] }}{% endblock %}
+{% block content %}
+<div id="posts">
+<article>
+	<span class="title">{{ post["title"] }}</span>
+	<span class="author">{{ post["author"] }}</span>
+	<span class="datetime">{{ post["datetime"].ctime() }}</span>
+	<section class="content">{{ md(post["content"])|safe }}</section>
+	{% if post["tags"]|length > 0 %}tagged in:<ul class="tags">
+		{% for tag in post["tags"] %}
+		<li><span><a href="#">{{ tag }}</a></span></li>
+		{% endfor %}
+	</ul>{% endif %}
+</article>
+</div>
+{% endblock content %}

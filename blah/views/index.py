@@ -1,4 +1,4 @@
-from flask import render_template, g
+from flask import g, render_template
 from markdown import markdown
 from pymongo import DESCENDING
 

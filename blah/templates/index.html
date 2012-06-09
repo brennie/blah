@@ -6,7 +6,7 @@ There are no posts here.
 {% else %}
 <div id="posts">
 	{% for post in posts %}<article>
-		<span class="title">{{ post["title"] }}</span>
+		<span class="title"><a href="/post/{{post["_id"]}}">{{ post["title"] }}</a></span>
 		<span class="author">{{ post["author"] }}</span>
 		<span class="datetime">{{ post["datetime"].ctime() }}</span>
 		<section class="content">{{ md(post["content"])|safe }}</section>
