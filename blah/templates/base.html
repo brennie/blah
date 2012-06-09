@@ -15,6 +15,7 @@
 		{% if "user" not in session.keys() %}
 		<li><a href="{{ url_for('login.get') }}">login</a></li>
 		{% else %}
+		<li><a href="{{ url_for('admin.get') }}">admin</a></li>
 		<li><a href="{{ url_for('logout') }}">logout</a></li>
 		{% endif %}
 	</ul>

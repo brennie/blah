@@ -5,7 +5,9 @@ def get():
     if "user" in session.keys():
         return redirect(url_for("index"))
 
-    return render_template("login.html")
+    print request.args.get("next")
+
+    return render_template("login.html", next=request.args.get("next"))
 
 def post():
     if "user" in session.keys():
@@ -17,7 +19,8 @@ def post():
         flash("You were successfully logged in.", "success")
 
         session["user"] = {"_id": user["_id"], "name": user["name"]}
-        return redirect(url_for("index"))
+
+        return redirect(request.form.get("next", url_for("index")))
 
     flash("Incorrect email address and/or password.", "error")
-    return render_template("login.html")
+    return redirect(url_for("login.get"))

@@ -1,3 +1,4 @@
+import admin
 import index
 import login
 import logout

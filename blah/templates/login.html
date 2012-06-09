@@ -2,6 +2,9 @@
 {% block title %}blah - login{% endblock %}
 {% block content %}
 <form method="POST" action="{{ url_for('login.post') }}">
+	{% if next is not none %}
+	<input type="hidden" name="next" value="{{ next }}">
+	{% endif %}
 	<table id="login">
 		<tr>
 			<td>email</td>
@@ -12,7 +15,7 @@
 			<td><input type="password" name="password"></td>
 		</tr>
 		<tr>
-			<td colspan="2" class="submit">
+			<td colspan="2" class="centred">
 				<input type="submit" value="login">
 			</td>
 		</tr>

@@ -69,7 +69,6 @@ if __name__ == "__main__":
         users = db["users"]
         user = {"name": admin_name,
                 "email": admin_mail,
-                "pass": admin_pass,
-                "admin": True}
+                "pass": admin_pass}
 
         users.insert(user)

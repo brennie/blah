@@ -39,21 +39,29 @@ nav ul li, .tags, .tags li {
 	background-color: #FF7F7F;
 }
 
-article {
+#create input[type=text], #create textarea {
+	border: 1px solid black;
+	width: 100%;
+}
+
+textarea{
+	resize: vertical;
+}
+
+article, #panel {
 	border: 1px solid black;
 	margin: 10px;
 	padding: 10px;
 }
 
-table#login {
+table#login, table#create {
 	padding: 10px;
 	text-align: left;
 	margin: 0 auto;
 }
 
-
-.submit { text-align: center; }
-
+table#create { width: 100% }
+.centred { text-align: center; }
 
 article .title {
 	font-weight: bold;
