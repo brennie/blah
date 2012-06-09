@@ -8,14 +8,25 @@
 	<link rel="stylesheet" type="text/css" href="/static/style.css">
 </head>
 <body>
-	<header><div>blah - a tiny flask blog</div></header>
+<header><div>blah - a tiny flask blog</div></header>
 <nav>
 	<ul>
 		<li><a href="{{ url_for('index') }}">home</a></li>
-		<li><a href="#">login</a></li>
+		{% if "user" not in session.keys() %}
+		<li><a href="{{ url_for('login.get') }}">login</a></li>
+		{% else %}
+		<li><a href="{{ url_for('logout') }}">logout</a></li>
+		{% endif %}
 	</ul>
 </nav>
+<div id="body">
+{% with messages = get_flashed_messages(with_categories=True) %}
+	{% if messages %}<div id="flashes">
+		{% for category, message in messages %}<span class="{{ category }}">{{ message }}</span>
+		{% endfor %}
+	</div>{% endif %}{% endwith %}
 {% block content %}{% endblock %}
+</div>
 <footer><div>Powered by <a href="https://github.com/brennie/blah">blah</a></div></footer>
 </body>
 </html>

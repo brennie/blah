@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% block title %}blah - {{ post["title"] }}{% endblock %}
 {% block content %}
-<div id="posts">
 <article>
 	<span class="title">{{ post["title"] }}</span>
 	<span class="author">{{ post["author"] }}</span>
@@ -13,5 +12,4 @@
 		{% endfor %}
 	</ul>{% endif %}
 </article>
-</div>
 {% endblock content %}

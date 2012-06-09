@@ -2,9 +2,8 @@
 {% block title %}blah - home{% endblock %}
 {% block content %}
 {% if posts.count() == 0 %}
-There are no posts here.
+	There are no posts here.
 {% else %}
-<div id="posts">
 	{% for post in posts %}<article>
 		<span class="title"><a href="/post/{{post["_id"]}}">{{ post["title"] }}</a></span>
 		<span class="author">{{ post["author"] }}</span>
@@ -17,5 +16,5 @@ There are no posts here.
 		</ul>{% endif %}
 	</article>
 	{% endfor %}
-</div>{% endif %}
+{% endif %}
 {% endblock content %}
