@@ -5,10 +5,10 @@
 	<title>
 		{% block title %}{% endblock %}
 	</title>
-	<link rel="stylesheet" type="text/css" href="/static/style.css">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-<header><div>blah - a tiny flask blog</div></header>
+<header><div>blah - a simple Python blog</div></header>
 <nav>
 	<ul>
 		<li><a href="{{ url_for('index') }}">home</a></li>

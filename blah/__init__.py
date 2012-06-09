@@ -13,11 +13,10 @@ class BlahApp(Flask):
         Parameters:
             development: Enables development server mode.
         """
+        super(BlahApp, self).__init__(__name__)
+        
         if development:
-            super(BlahApp, self).__init__(__name__, static_folder="static")
             self.config["DEBUG"] = True
-        else:
-            super(BlahApp, self).__init__(__name__, static_folder=None)
 
         self.config.from_pyfile("blah.cfg")
 
