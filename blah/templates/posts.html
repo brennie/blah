@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}blah - home{% endblock %}
+{% block title %}blah - {{ title }}{% endblock %}
 {% block content %}
 {% if posts.count(true) == 0 %}
 	There are no posts here.
