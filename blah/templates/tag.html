@@ -6,4 +6,5 @@
 {% else %}
 	{% for post in posts %}{% include "post_template.html" %}{% endfor %}
 {% endif %}
+{% if newer is not none or older is not none %}{% include "pages_template.html" %}{% endif %}
 {% endblock content %}

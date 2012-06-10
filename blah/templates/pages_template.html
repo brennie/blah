@@ -1,0 +1,5 @@
+<div id="pages">
+	{% if newer is not none %}<span class="newer"><a href="{{ newer }}">newer</a></span>{% endif %}
+	&nbsp;
+	{% if older is not none %}<span class="older"><a href="{{ older }}">older</a></span>{% endif %}
+</div>
