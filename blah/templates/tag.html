@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}blah - posts tagged "{{ tag }}"{% endblock %}
 {% block content %}
-{% if posts.size() == 0 %}
+{% if posts.count(true) == 0 %}
 	There are no posts here.
 {% else %}
 	{% for post in posts %}{% include "post_template.html" %}{% endfor %}
