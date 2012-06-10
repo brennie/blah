@@ -60,8 +60,13 @@ table#login, table#create {
 	margin: 0 auto;
 }
 
-table#create { width: 100% }
-.centred { text-align: center; }
+table#create {
+	width: 100%;
+}
+
+.centred {
+	text-align: center;
+}
 
 article .title {
 	font-weight: bold;
