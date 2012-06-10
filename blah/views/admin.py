@@ -1,6 +1,7 @@
-from auth import require_login
 from datetime import datetime
 from flask import flash, g, redirect, request, render_template, session, url_for
+
+from auth import require_login
 
 @require_login()
 def get(*args):

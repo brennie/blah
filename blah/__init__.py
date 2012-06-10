@@ -1,4 +1,5 @@
 from flask import Flask, g
+import markdown
 import pymongo
 
 import views
@@ -19,6 +20,8 @@ class BlahApp(Flask):
             self.config["DEBUG"] = True
 
         self.config.from_pyfile("blah.cfg")
+
+        self.jinja_env.filters["markdown"] = markdown.markdown
 
         self.add_url_rule("/", "index", views.index.get)
         self.add_url_rule("/admin", "admin.get", views.admin.get, methods=["GET"])
