@@ -9,6 +9,12 @@ Requirements
 - mongoDB (`easy_install pymongo`)
 - Python 2
 
+Features
+--------
+
+- Create posts in markdown
+- gist support in posts (see `blah/extensions.py`)
+
 Setup
 -----
 
