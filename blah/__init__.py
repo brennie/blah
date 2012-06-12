@@ -3,6 +3,7 @@ import markdown
 import pymongo
 
 import views
+from .extensions import markdown
 
 __all__ = ("BlahApp",)
 
@@ -21,7 +22,7 @@ class BlahApp(Flask):
 
         self.config.from_pyfile("blah.cfg")
 
-        self.jinja_env.filters["markdown"] = markdown.markdown
+        self.jinja_env.filters["markdown"] = markdown
 
         self.add_url_rule("/", "index", views.index)
         self.add_url_rule("/admin", "admin", views.admin)
