@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}blah - login{% endblock %}
 {% block content %}
-<form method="POST" action="{{ url_for('login.post') }}">
+<form method="POST" action="{{ url_for('login') }}">
 	{% if next is not none %}
 	<input type="hidden" name="next" value="{{ next }}">
 	{% endif %}

@@ -2,7 +2,7 @@ from bson import ObjectId
 from flask import abort, g, render_template
 from pymongo import DESCENDING
 
-def get(id):
+def post(id):
     post = g.db.posts.find_one({"_id": ObjectId(id)})
 
     if post is None:

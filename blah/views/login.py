@@ -1,6 +1,12 @@
 from flask import flash, g, render_template, redirect, request, session, url_for
 from werkzeug.security import check_password_hash
 
+def login():
+    if request.method == "GET":
+        return get()
+    elif request.method == "POST":
+        return post()
+
 def get():
     if "user" in session.keys():
         return redirect(url_for("index"))

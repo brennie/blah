@@ -55,7 +55,7 @@ def require_login(next_view=None, **url_args):
                 flash("You must be logged in to access this page.", "error")
                 next = url_for(next_view or request.endpoint, **url_args)
 
-                return redirect(url_for("login.get", next=next))
+                return redirect(url_for("login", next=next))
 
             return view(*args, **kwargs)
 

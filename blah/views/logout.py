@@ -1,6 +1,6 @@
 from flask import flash, g, redirect, request, session, url_for
 
-def get():
+def logout():
     if "user" in session.keys():
         del session["user"]
         flash("You have been logged out.", "success")

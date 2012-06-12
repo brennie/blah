@@ -13,9 +13,9 @@
 	<ul>
 		<li><a href="{{ url_for('index') }}">home</a></li>
 		{% if "user" not in session.keys() %}
-		<li><a href="{{ url_for('login.get') }}">login</a></li>
+		<li><a href="{{ url_for('login') }}">login</a></li>
 		{% else %}
-		<li><a href="{{ url_for('admin.get') }}">admin</a></li>
+		<li><a href="{{ url_for('admin') }}">admin</a></li>
 		<li><a href="{{ url_for('logout') }}">logout</a></li>
 		{% endif %}
 	</ul>

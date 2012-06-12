@@ -1,4 +1,4 @@
 from .util import render_posts
 
-def get():
+def index():
     return render_posts("home", "index")

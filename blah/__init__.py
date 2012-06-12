@@ -23,15 +23,13 @@ class BlahApp(Flask):
 
         self.jinja_env.filters["markdown"] = markdown.markdown
 
-        self.add_url_rule("/", "index", views.index.get)
-        self.add_url_rule("/admin", "admin.get", views.admin.get, methods=["GET"])
-        self.add_url_rule("/admin/post/<action>", "admin_post.get", views.admin_post.get, methods=["GET"])
-        self.add_url_rule("/admin/post/<action>", "admin_post.post", views.admin_post.post, methods=["POST"])
-        self.add_url_rule("/login", "login.get", views.login.get, methods=["GET"])
-        self.add_url_rule("/login", "login.post", views.login.post, methods=["POST"])
-        self.add_url_rule("/logout", "logout", views.logout.get)
-        self.add_url_rule("/post/<id>", "post", views.post.get)
-        self.add_url_rule("/tag/<tag>", "tag", views.tag.get)
+        self.add_url_rule("/", "index", views.index)
+        self.add_url_rule("/admin", "admin", views.admin)
+        self.add_url_rule("/admin/post/<action>", "admin_post", views.admin_post, methods=["GET", "POST"])
+        self.add_url_rule("/login", "login", views.login, methods=["GET", "POST"])
+        self.add_url_rule("/logout", "logout", views.logout)
+        self.add_url_rule("/post/<id>", "post", views.post)
+        self.add_url_rule("/tag/<tag>", "tag", views.tag)
 
         @self.before_request
         def before_request():
