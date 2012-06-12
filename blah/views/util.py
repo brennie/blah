@@ -1,4 +1,4 @@
-from flask import flash, g, redirect, request, render_template, url_for
+from flask import flash, g, redirect, request, render_template, session, url_for
 from pymongo import DESCENDING
 
 def render_posts(title, view_name, spec=None, **kwargs):
@@ -30,13 +30,15 @@ def render_posts(title, view_name, spec=None, **kwargs):
 
     return render_template("posts.html", title=title, posts=posts, newer=newer, older=older)
 
-def require_login(next_view=None):
+def require_login(next_view=None, **url_args):
     """Returns a decorator to wrap a view so that the user is forwarded to the
     login page if he/she is not logged in.
 
     Parameters:
         next: The next view to forward do. If it is not specified, it will
               default to the current page.
+        url_args: Arguments to pass to url_for(). Used only when generating the
+                  url to forward to.
 
     """
 
@@ -49,14 +51,9 @@ def require_login(next_view=None):
         """
 
         def required_login_view(*args, **kwargs):
-            # request.path must be evaluated in a request context
-            if next_view is None:
-                next = request.path
-            else:
-                next = url_for(next_view)
-
             if "user" not in session.keys():
                 flash("You must be logged in to access this page.", "error")
+                next = url_for(next_view or request.endpoint, **url_args)
 
                 return redirect(url_for("login.get", next=next))
 
