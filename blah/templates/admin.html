@@ -2,26 +2,7 @@
 {% block title %}admin panel{% endblock %}
 {% block content %}
 <div id="panel">
-
-<form method="POST" action="{{ url_for('admin.post', action='create') }}">
-	<table id="create">
-		<tr>
-			<td colspan="2" class="centred">create post</td>
-		</tr>
-		<tr>
-			<td>title</td>
-			<td><input type="text" name="title"></td>
-		</tr>
-		<tr>
-			<td colspan="2"><textarea name="content" rows="20"></textarea></td>
-		<tr>
-			<td>tags</td>
-			<td><input type="text" name="tags"></td>
-		</tr>
-		<tr>
-			<td colspan="2" class="centred"><input type="submit" value="Submit"></td>
-		</tr>
-	</table>
+<a href="{{ url_for('admin_post.get', action='create') }}">create a post</a>
 </form>
 </div>
 {% endblock %}

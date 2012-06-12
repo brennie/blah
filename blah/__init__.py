@@ -25,7 +25,8 @@ class BlahApp(Flask):
 
         self.add_url_rule("/", "index", views.index.get)
         self.add_url_rule("/admin", "admin.get", views.admin.get, methods=["GET"])
-        self.add_url_rule("/admin/<action>", "admin.post", views.admin.post, methods=["POST"])
+        self.add_url_rule("/admin/post/<action>", "admin_post.get", views.admin_post.get, methods=["GET"])
+        self.add_url_rule("/admin/post/<action>", "admin_post.post", views.admin_post.post, methods=["POST"])
         self.add_url_rule("/login", "login.get", views.login.get, methods=["GET"])
         self.add_url_rule("/login", "login.post", views.login.post, methods=["POST"])
         self.add_url_rule("/logout", "logout", views.logout.get)
