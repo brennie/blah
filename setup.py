@@ -52,6 +52,9 @@ if __name__ == "__main__":
     else:
         config["DB_AUTH"] = False
 
+    config["RECAPTCHA_PUBLIC"] = read_option("reCAPTCHA public key")
+    config["RECAPTCHA_PRIVATE"] = read_option("reCAPTCHA private key")
+
     config["SECRET_KEY"] = os.urandom(32)
 
     with open(os.path.join("blah","blah.cfg"), "w") as cfg:

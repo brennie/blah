@@ -7,7 +7,9 @@ Requirements
 - Flask (`easy_install flask`)
 - markdown (`easy_install markdown`)
 - mongoDB (`easy_install pymongo`)
+- requests (`easy_install requests`)
 - Python 2
+- A reCAPTCHA account
 
 Features
 --------
