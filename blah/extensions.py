@@ -3,7 +3,7 @@ from markdown.inlinepatterns import Pattern
 from markdown.util import etree
 import re
 
-GIST_RE = r"{gist:(\d+)}"
+GIST_RE = r"{gist:([0-9a-f]+)}"
     
 class GistPattern(Pattern):
     """Enable inclusion of gists into markdown.
