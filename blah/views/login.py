@@ -3,17 +3,17 @@ from werkzeug.security import check_password_hash
 
 def login():
     if request.method == "GET":
-        return get()
+        return _get()
     elif request.method == "POST":
-        return post()
+        return _post()
 
-def get():
+def _get():
     if "user" in session.keys():
         return redirect(url_for("index"))
 
     return render_template("login.html", next=request.args.get("next"))
 
-def post():
+def _post():
     if "user" in session.keys():
         return redirect(url_for("index"))
 

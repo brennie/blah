@@ -29,7 +29,7 @@ class BlahApp(Flask):
         self.add_url_rule("/admin/post/<action>", "admin_post", views.admin_post, methods=["GET", "POST"])
         self.add_url_rule("/login", "login", views.login, methods=["GET", "POST"])
         self.add_url_rule("/logout", "logout", views.logout)
-        self.add_url_rule("/post/<id>", "post", views.post)
+        self.add_url_rule("/post/<id>", "post", views.post, methods=["GET", "POST"])
         self.add_url_rule("/tag/<tag>", "tag", views.tag)
 
         @self.before_request

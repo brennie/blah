@@ -23,6 +23,6 @@ class GistExtension(Extension):
 
 def markdown(text):
     """Run markdown on text, including the gist extension."""
-    md = Markdown(extensions=[GistExtension()])
+    md = Markdown(safe_mode="escape", extensions=[GistExtension()])
 
     return md.convert(text)

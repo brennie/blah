@@ -1,5 +1,50 @@
 {% extends "base.html" %}
 {% block title %}blah - {{ post["title"] }}{% endblock %}
+{% block head %}<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='recaptcha.css') }}">
+<script type="text/javascript">
+var RecaptchaOptions = { theme: 'clean' };
+</script>{% endblock %}
 {% block content %}
 {% include "post_template.html" %}
+<div id="comments">
+	{% if comments.count() == 0 %}
+		There are no comments here; be the first to leave one.
+	{% else %}
+		{% for comment in comments %}{% include "comment_template.html" %}{% endfor %}
+	{% endif %}
+	<form method="POST" action="{{ url_for('post', id=post['_id']) }}">
+		<table id="comment">
+			<tr><td>leave a comment:</td></tr>
+{% if "user" not in session.keys() %}
+			<tr>
+				<td>name</td>
+				<td><input name="name" type="text" class="fill"></td>
+			</tr>
+			<tr>
+				<td>email</td>
+				<td><input name="email" type="email" class="fill"></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+{% include "recaptcha.html" %}
+				</td>
+			</tr>
+{% else %}
+		<tr>
+			<td>posting as</td>
+			<td>{{ session["user"]["name"] }}</td>
+		</tr>
+{% endif %}
+		<tr>
+			<td colspan="2">
+				<textarea name="content" rows="5" class="fill"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" class="centred">
+				<input type="submit" value="post comment">
+			</td>
+		</table>
+	</form>
+</div>
 {% endblock content %}

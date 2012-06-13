@@ -1,0 +1,5 @@
+<article>
+    {% if "_id" in comment["author"].keys() %}<span class="author verified">{% else %}<span class="author">{% endif %}{{ comment["author"]["name"] }}</span>
+    <span class="datetime">{{ comment["datetime"].ctime() }}</span>
+    <section class="content">{{ comment["content"] | markdown | safe }}</section>
+</article>

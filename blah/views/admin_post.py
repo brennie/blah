@@ -6,17 +6,17 @@ from .util import require_login
 @require_login(action="create")
 def admin_post(action):
     if request.method == "GET":
-        return get(action)
+        return _get(action)
     elif request.method == "POST":
-        return post(action)
+        return _post(action)
 
-def get(action):
+def _get(action):
     if action == "create":
        return render_template("admin_post.html")
 
     abort(404)
 
-def post(action):
+def _post(action):
     if action == "create":
         post = {"author": session["user"]["name"],
                 "content": request.form["content"],
@@ -26,7 +26,7 @@ def post(action):
 
         postid = g.db.posts.insert(post)
 
-        flash("Post %s successfully posted." % postid, "success")
+        flash("Post successfully posted.", "success")
         
         return redirect(url_for("admin_post", action="create"))
 

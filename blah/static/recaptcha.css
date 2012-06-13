@@ -1,0 +1,8 @@
+#recaptcha_table {
+	margin: 0 auto !important;
+	border: 0 !important;
+}
+
+#recaptcha_table #recaptcha_image {
+	border: 10px black !important;
+}

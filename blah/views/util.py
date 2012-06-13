@@ -1,5 +1,17 @@
 from flask import flash, g, redirect, request, render_template, session, url_for
 from pymongo import DESCENDING
+import re
+
+_email_re = re.compile(r"^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$", re.I)
+
+def validate_email(email):
+    """Naive email validation.
+
+    Parameters:
+        email: The email to validate.
+    """
+
+    return bool(_email_re.match(email))
 
 def render_posts(title, view_name, spec=None, **kwargs):
     """Render a set of posts filtered by spec.

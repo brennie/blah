@@ -31,7 +31,7 @@ nav ul li, .tags, .tags li {
 	padding: 10px;
 }
 
-.success {
+.success, .verified {
 	background-color: #7FFF8A;
 }
 
@@ -39,7 +39,7 @@ nav ul li, .tags, .tags li {
 	background-color: #FF7F7F;
 }
 
-#create input[type=text], #create textarea {
+input.fill, textarea.fill {
 	border: 1px solid black;
 	width: 100%;
 }
@@ -47,14 +47,17 @@ nav ul li, .tags, .tags li {
 textarea{
 	resize: vertical;
 }
+table#comment {
+	width: 30em;
+}
 
-article, #panel, #pages {
+article, #panel, #pages, #comments {
 	border: 1px solid black;
 	margin: 10px;
 	padding: 10px;
 }
 
-table#login, table#create {
+table#login, table#create, table#comment {
 	padding: 10px;
 	text-align: left;
 	margin: 0 auto;
