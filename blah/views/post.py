@@ -43,8 +43,6 @@ def _post(id):
         
         g.db.comments.insert(comment)
 
-        flash("Your comment was posted.", "success")
-        
     else:
         error = False
 
@@ -75,6 +73,6 @@ def _post(id):
 
     g.db.comments.insert(comment)
 
-    flash("Your comment was successfully posted.")
+    flash("Your comment was posted.", "success")
    
     return redirect(url_for("post", id=id))
