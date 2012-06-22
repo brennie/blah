@@ -19,9 +19,17 @@ Features
 
 Setup
 -----
+1. Clone the git repository if you haven't already  
+`git clone git://github.com/brennie/blah.git -O blog`  
+This will clone it into blog/
+2. Install and set up `mongoDB` and `Flask`
+3. Run `setup.py` and follow the instructions
 
-1. Install and set up `mongoDB` and `Flask`
-2. Run `setup.py` and follow the instructions
+Updating
+---------
+To update blah to the latest version, just enter the top directory and run:  
+`git pull`
+
 
 Development Server
 ------------------
