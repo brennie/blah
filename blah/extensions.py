@@ -1,3 +1,6 @@
+# Written by Barret Rennie, 2012
+# This file is released into the public domain.
+
 from markdown import Extension, Markdown
 from markdown.inlinepatterns import Pattern
 from markdown.util import etree
