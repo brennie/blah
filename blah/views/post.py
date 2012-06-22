@@ -84,7 +84,7 @@ def _post(id):
             "response": request.form["recaptcha_response_field"]
         }
 
-        verified = requests.post("http://www.google.com/recaptcha/api/verify", data=recaptcha).content
+        verified = requests.post("https://www.google.com/recaptcha/api/verify", data=recaptcha).content
         
         if verified.startswith("false"):
             flash("Incorrect captcha response.", "error")
