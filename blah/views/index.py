@@ -18,7 +18,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Index view."""
+
 from .util import render_posts
 
 def index():
+    """Show the latest posts."""
     return render_posts("home", "index")

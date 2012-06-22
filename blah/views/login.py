@@ -18,22 +18,27 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Login form and logic."""
+
 from flask import flash, g, render_template, redirect, request, session, url_for
 from werkzeug.security import check_password_hash
 
 def login():
+    """Show login form or attempt login, depending on the request method."""
     if request.method == "GET":
         return _get()
     elif request.method == "POST":
         return _post()
 
 def _get():
+    """Show login form."""
     if "user" in session.keys():
         return redirect(url_for("index"))
 
     return render_template("login.html", next=request.args.get("next"))
 
 def _post():
+    """Attempt login."""
     if "user" in session.keys():
         return redirect(url_for("index"))
 

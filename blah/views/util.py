@@ -18,6 +18,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Utility functions for blah."""
+
 from flask import flash, g, redirect, request, render_template, session, url_for
 from pymongo import DESCENDING
 import re

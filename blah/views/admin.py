@@ -18,6 +18,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Basic admin panel view."""
+
 from datetime import datetime
 from flask import render_template
 
@@ -25,4 +27,5 @@ from .util import require_login
 
 @require_login()
 def admin():
+    """Show the admin panel."""
     return render_template("admin.html")

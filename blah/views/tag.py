@@ -18,7 +18,14 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Show posts which have a certain tag."""
+
 from .util import render_posts
 
 def tag(t):
+    """Show the posts that have the tag t.
+
+    Parameters:
+        t: the tag
+    """
     return render_posts("posts tagged '%s'" % t, "tag", {"tags": t}, tag=t)

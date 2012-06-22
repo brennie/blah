@@ -18,6 +18,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""The blah application module and application setup logic."""
+
 from flask import Flask, g
 import markdown
 import pymongo
@@ -54,6 +56,7 @@ class BlahApp(Flask):
 
         @self.before_request
         def before_request():
+            """Set up the db object for the app."""
             g.conn = None
             g.conn = pymongo.Connection(self.config["DB_HOST"], self.config["DB_PORT"])
             g.db = g.conn[self.config["DB"]]
@@ -63,6 +66,7 @@ class BlahApp(Flask):
 
         @self.teardown_request
         def teardown_request(exception):
+            """Disconnect from the database."""
             if g.conn is not None:
                 g.conn.disconnect()
                 g.db = None

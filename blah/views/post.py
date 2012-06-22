@@ -18,6 +18,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Single post view."""
+
 from bson import ObjectId
 from datetime import datetime
 from flask import abort, current_app, flash, g, render_template, redirect, request, session, url_for
@@ -29,12 +31,15 @@ import requests
 from .util import validate_email
 
 def post(id):
+    """Render a single post or post a comment, depending on the request method.
+    """
     if request.method == "GET":
         return _get(id)
     elif request.method == "POST":
         return _post(id)
 
 def _get(id):
+    """Render a single post."""
     post = g.db.posts.find_one({"_id": ObjectId(id)})
     comments = g.db.comments.find({"post": ObjectId(id)}).sort("datetime", ASCENDING)
 
@@ -44,6 +49,7 @@ def _get(id):
     return render_template("post.html", post=post, comments=comments)
 
 def _post(id):
+    """Post a comment."""
     comment = {}
     comment["post"] = ObjectId(id)
     comment["content"] = request.form["content"]

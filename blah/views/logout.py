@@ -18,9 +18,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Logout logic."""
+
 from flask import flash, g, redirect, request, session, url_for
 
 def logout():
+    """Log the user out if he/she is logged in."""
     if "user" in session.keys():
         del session["user"]
         flash("You have been logged out.", "success")

@@ -20,6 +20,13 @@
 
 #!/usr/bin/env python
 
+"""The blah blog app.
+
+This is intended to be run by uwsgi or similar in production. 
+For a development server, run this as a python application, i.e.
+$ python app.py
+"""
+
 from blah import *
 
 if __name__ == "__main__":
