@@ -1,8 +1,30 @@
 {% extends "base.html" %}
 {% block title %}admin panel{% endblock %}
 {% block content %}
-<div id="panel">
+<div id="admin-nav">
 <a href="{{ url_for('admin_post', action='create') }}">create a post</a>
+</div>
+<div id="posts">
+{% if posts is not none %}
+<table>
+	<thead>
+		<th>Post Title</th>
+		<th>Edit Post</th>
+	</thead>
+	{% for post in posts %}<tr>
+		<td>{{ post['title'] }}</td>
+		<td>
+			<a href="{{ url_for('admin_post', action='edit', id=post['_id']) }}">edit</a>
+		</td>
+		<td>
+		</td>
+	</tr>
+	{% endfor %}
+</table>
+{% if newer is not none or older is not none %}{% include "pages_template.html" %}{% endif %}
+{% else %}
+{% endif %}
+</div>
 </form>
 </div>
 {% endblock %}

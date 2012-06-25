@@ -23,9 +23,12 @@
 from datetime import datetime
 from flask import render_template
 
-from .util import require_login
+from .util import get_posts_by_page, require_login
 
 @require_login()
 def admin():
     """Show the admin panel."""
-    return render_template("admin.html")
+
+    posts, older, newer = get_posts_by_page()
+
+    return render_template("admin.html", posts=posts, older=older, newer=newer)

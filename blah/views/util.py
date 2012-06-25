@@ -35,17 +35,15 @@ def validate_email(email):
 
     return bool(_email_re.match(email))
 
-def render_posts(title, view_name, spec=None, **kwargs):
-    """Render a set of posts filtered by spec.
+def get_posts_by_page(spec=None, **url_args):
+    """Get the nth page of posts (determined by a request argument.
 
     Parameters:
-        title: The title of the page.
-        view_name: The name of the view used to generate filtering. If there
-                   other pages, they will use this to get the url.
-        spec: The filter to give to g.db.posts.find().
-        kwargs: These arguments are passed to calls to url_for().
+        url_args: These arguments are passed to calls to url_for().
+
+    Returns a 3-tuple of (posts, older, newer) where older and newer are the
+    urls for the next and previous pages respectively.
     """
-    
     page = int(request.args.get("page", 1))
 
     posts = g.db.posts.find(spec).sort("datetime", DESCENDING).skip((page - 1) * 10).limit(10)
@@ -61,6 +59,21 @@ def render_posts(title, view_name, spec=None, **kwargs):
 
     if posts.count() > page * 10:
         older = url_for(view_name, page=page + 1, **kwargs)
+
+    return (posts, older, newer)
+
+def render_posts(title, view_name, spec=None, **url_args):
+    """Render a set of posts filtered by spec.
+
+    Parameters:
+        title: The title of the page.
+        view_name: The name of the view used to generate filtering. If there
+                   other pages, they will use this to get the url.
+        spec: The filter to give to g.db.posts.find().
+        url_args: These arguments are passed to calls to url_for().
+    """
+    
+    posts, older, newer = get_posts_by_page(spec, **url_args)
 
     return render_template("posts.html", title=title, posts=posts, newer=newer, older=older)
 

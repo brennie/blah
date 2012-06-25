@@ -20,8 +20,10 @@
 
 """Create posts."""
 
+from bson import ObjectId
+import bson.errors
 from datetime import datetime
-from flask import flash, g, redirect, request, render_template, session, url_for
+from flask import abort, flash, g, redirect, request, render_template, session, url_for
 
 from .util import require_login
 
@@ -35,10 +37,30 @@ def admin_post(action):
     elif request.method == "POST":
         return _post(action)
 
+def invalid_id():
+    flash("Invalid post ID", "error")
+    return redirect(url_for("admin"))
+
 def _get(action):
     """Show the post form."""
     if action == "create":
-       return render_template("admin_post.html")
+       return render_template("admin_create.html")
+
+    elif action == "edit":
+        post_id = request.args.get("id", None)
+        if post_id is None:
+            return redirect(url_for("admin"))
+
+        try:
+            post = g.db.posts.find_one({"_id": ObjectId(post_id)})
+        except bson.errors.InvalidId:
+            return invalid_id()
+
+        if post is None:
+            return invalid_id()
+
+        post['tags'] = " ".join(post['tags'])
+        return render_template("admin_edit.html", post=post)
 
     abort(404)
 
@@ -56,5 +78,25 @@ def _post(action):
         flash("Post successfully posted.", "success")
         
         return redirect(url_for("admin_post", action="create"))
+
+    elif action == "edit":
+        try:
+            post_id = ObjectId(request.form['id'])
+        except bson.errors.InvalidId:
+            return invalid_id()
+
+        if g.db.posts.find_one({"_id": post_id}) is None:
+            return invalid_id()
+
+        post = {"author": session["user"]["name"],
+                "content": request.form["content"],
+                "tags": request.form["tags"].split(),
+                "title": request.form["title"]}
+
+        # We use $set so that we do not overwrite the datetime field
+        g.db.posts.update({"_id": post_id}, {"$set": post})
+        flash("Post successfully edited.", "success")
+
+        return redirect(url_for("admin"))
 
     abort(404)
