@@ -10,6 +10,7 @@
 	<thead>
 		<th>Post Title</th>
 		<th>Edit Post</th>
+		<th>Moderate Comments</th>
 	</thead>
 	{% for post in posts %}<tr>
 		<td>{{ post['title'] }}</td>
@@ -17,6 +18,7 @@
 			<a href="{{ url_for('admin_post', action='edit', id=post['_id']) }}">edit</a>
 		</td>
 		<td>
+			<a href="{{ url_for('admin_post', action='moderate', id=post['_id']) }}">moderate</a>
 		</td>
 	</tr>
 	{% endfor %}

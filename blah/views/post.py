@@ -53,6 +53,7 @@ def _post(id):
     comment = {}
     comment["post"] = ObjectId(id)
     comment["content"] = request.form["content"]
+    comment["ipaddr"] = request.remote_addr
     comment["datetime"] = datetime.now()
     
     if len(request.form["content"]) == 0:

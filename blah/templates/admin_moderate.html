@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}admin panel{% endblock %}
+{% block content %}
+<div id="panel">
+	{% if comments.count() > 0 %}
+	Moderating comments for post: <a href="{{ url_for('post', id=post['_id'])}}">{{ post['title'] }}</a>
+	{% for comment in comments %}
+	<article>
+		{% if "_id" in comment["author"].keys() %}<span class="author verified">{% else %}<span class="author">{{ comment["author"]["name"] }}{% endif %}</span>
+		<span class="datetime">{{ comment["datetime"].ctime() }}</span>
+		<span class="ipaddr">{{ comment["ipaddr"] }}</span>
+		{% if "email" in comment["author"].keys() %}<span class="email">{{ comment["email"] }}</span>{% endif %}
+        <section class="content">{{ comment["content"] | markdown | safe }}</section>
+        <form action="{{ url_for('admin_post', action='moderate') }}" method="POST">
+        	<input type="hidden" name="id" value="{{ comment['_id'] }}">
+        	<input type="submit" value="delete">
+        </form>
+	</article>
+	{% endfor %}
+	{% else %}
+	No comments for this post
+	{% endif %}
+</div>
+{% endblock content %}

@@ -34,11 +34,24 @@ def admin_post(action):
     """
     if request.method == "GET":
         return _get(action)
+
     elif request.method == "POST":
         return _post(action)
 
-def invalid_id():
-    flash("Invalid post ID", "error")
+def invalid_post_id():
+    """An invalid post ID was used."""
+    return flash_and_redirect("Invalid post ID")
+
+def invalid_comment_id():
+    """An invalid comment ID was used."""
+    return flash_and_redirect("Invalid comment ID")
+
+def flash_and_redirect(message):
+    """Flash the specified message and redirect to the admin panel.
+
+    Parameters:
+        message: the error message to flash."""
+    flash(message, "error")
     return redirect(url_for("admin"))
 
 def _get(action):
@@ -54,13 +67,26 @@ def _get(action):
         try:
             post = g.db.posts.find_one({"_id": ObjectId(post_id)})
         except bson.errors.InvalidId:
-            return invalid_id()
+            return invalid_post_id()
 
         if post is None:
-            return invalid_id()
+            return invalid_post_id()
 
         post['tags'] = " ".join(post['tags'])
         return render_template("admin_edit.html", post=post)
+
+    elif action == "moderate":
+        post_id = request.args.get("id", None)
+        if post_id is None:
+            return redirect(url_for("admin"))
+
+        try:
+            post = g.db.posts.find_one({"_id": ObjectId(post_id)})
+        except bson.errors.InvalidId:
+            return invalid_post_id()
+    
+        comments = g.db.comments.find({"post": post["_id"]})
+        return render_template("admin_moderate.html", post=post, comments=comments)
 
     abort(404)
 
@@ -82,11 +108,12 @@ def _post(action):
     elif action == "edit":
         try:
             post_id = ObjectId(request.form['id'])
+        
         except bson.errors.InvalidId:
-            return invalid_id()
+            return invalid_post_id()
 
         if g.db.posts.find_one({"_id": post_id}) is None:
-            return invalid_id()
+            return invalid_post_id()
 
         post = {"author": session["user"]["name"],
                 "content": request.form["content"],
@@ -96,6 +123,21 @@ def _post(action):
         # We use $set so that we do not overwrite the datetime field
         g.db.posts.update({"_id": post_id}, {"$set": post})
         flash("Post successfully edited.", "success")
+
+        return redirect(url_for("admin"))
+
+    elif action == "moderate":
+        try:
+            comment_id = ObjectId(request.form['id'])
+
+        except bson.errors.InvalidId:
+            return invalid_comment_id()
+
+        if g.db.comments.find_one({"_id": comment_id}) is None:
+            return invalid_comment_id()
+
+        g.db.comments.remove(comment_id)
+        flash("Comment successfully removed.", "success")
 
         return redirect(url_for("admin"))
 
