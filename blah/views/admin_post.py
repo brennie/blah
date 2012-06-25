@@ -139,6 +139,6 @@ def _post(action):
         g.db.comments.remove(comment_id)
         flash("Comment successfully removed.", "success")
 
-        return redirect(url_for("admin"))
+        return redirect(url_for("admin_post", action="moderate", id=request.form['post']))
 
     abort(404)
