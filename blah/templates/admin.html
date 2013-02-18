@@ -11,14 +11,18 @@
 		<th>Post Title</th>
 		<th>Edit Post</th>
 		<th>Moderate Comments</th>
+		<th>Delete Post</th>
 	</thead>
 	{% for post in posts %}<tr>
-		<td>{{ post['title'] }}</td>
+		<td><a href="{{ url_for('post', id=post['id']) }}">{{ post['title'] }}</a></td>
 		<td>
 			<a href="{{ url_for('admin_post', action='edit', id=post['_id']) }}">edit</a>
 		</td>
 		<td>
 			<a href="{{ url_for('admin_post', action='moderate', id=post['_id']) }}">moderate</a>
+		</td>
+		<td>
+			<a href="{{ url_for('admin_post', action='delete', id=post['_id']) }}">delete</a>
 		</td>
 	</tr>
 	{% endfor %}

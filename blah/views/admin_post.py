@@ -88,6 +88,18 @@ def _get(action):
         comments = g.db.comments.find({"post": post["_id"]})
         return render_template("admin_moderate.html", post=post, comments=comments)
 
+    elif action == "delete":
+        post_id = request.args.get("id", None)
+        if post_id is None:
+            return redirect(url_for("admin"))
+
+        try:
+            post = g.db.posts.find_one({"_id": ObjectId(post_id)})
+        except bson.errors.InvalidId:
+            return invalid_post_id()
+
+        return render_template("admin_delete.html", post=post)
+
     abort(404)
 
 def _post(action):

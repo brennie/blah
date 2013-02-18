@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}admin panel - delete post{% endblock %}
+{% block content %}
+<div id="panel">
+<form action="{{ url_for('admin_post', action='delete') }}">
+	<input type="hidden" name="id" value="{{ post['_id'] }}">
+Are you sure you want to delete <a href="{{ url_for('post', id=post['_id']) }}">{{ post['title'] }}</a>?
+	<input type="submit" value="delete">
+	<input type="button" value="cancel" onclick="window.history.back()">
+</form>
+</div>
+{% endblock %}
