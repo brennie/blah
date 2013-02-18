@@ -153,4 +153,19 @@ def _post(action):
 
         return redirect(url_for("admin_post", action="moderate", id=request.form['post']))
 
+    elif action == "delete":
+        post_id = request.args.get("id", None)
+        if post_id is None:
+            return redirect(url_for("admin"))
+
+        try:
+            post = g.db.posts.find_one({"_id": ObjectId(post_id)})
+        except bson.errors.InvalidId:
+            return invalid_post_id()
+
+        g.db.posts.remove(post_id)
+        flash("Post successfully removed.", "success")
+
+        return redirect(url_for("admin"))
+
     abort(404)
