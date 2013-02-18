@@ -156,7 +156,7 @@ def _post(action):
 
     elif action == "delete":
         try:
-            post_id = ObjectId(request.form['id']
+            post_id = ObjectId(request.form['id'])
 
         except bson.errors.InvalidId:
             return invalid_post_id()
