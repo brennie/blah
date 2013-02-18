@@ -104,6 +104,7 @@ def _get(action):
 
 def _post(action):
     """Create a post in the db."""
+
     if action == "create":
         post = {"author": session["user"]["name"],
                 "content": request.form["content"],
@@ -163,7 +164,7 @@ def _post(action):
         except bson.errors.InvalidId:
             return invalid_post_id()
 
-        g.db.posts.remove(post_id)
+        g.db.posts.remove(post)
         flash("Post successfully removed.", "success")
 
         return redirect(url_for("admin"))
